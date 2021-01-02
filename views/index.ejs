@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+    <title>URL Shrinker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&display=swap');        
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Baloo Bhaina 2', cursive;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            margin: 0;
+        }
+        .container{
+            /* border: 2px solid red; */
+            border: none;
+            border-radius: 20px;
+            background-color: rgb(111, 14, 131);
+            box-shadow: 10px 10px 20px 0px;
+            /* color: #ffffff; */
+            /* max-width: 100vw;  */
+            /* width: 100%; */
+        }
+        .container h1{
+            font-family: 'Lobster', cursive;                text-align: center;
+            font-size: 50px;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        .container form{
+            text-align: center;
+        }
+        .container table{
+            margin-top: 20px;
+            background-color: rgb(252, 232, 156);
+            border-radius: 10px;
+        }
+        .container table thead tr th{
+            color: rgb(47, 0, 255);
+        }
+        .container table tbody tr td a{
+            text-decoration: none;
+            color: rgb(255, 114, 79);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Shrinker</h1>
+        <form class="form-inline my-4" action="/shortUrls" method="post">
+            <label for="fullUrl" class="sr-only">Url</label>
+            <input class="form-control mr-2 col" required placeholder="Your Url" type="url" name="fullUrl" id="fullUrl">
+            <button class="btn btn-success" type="submit">Shrink</button>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Full URL</th>
+                    <th>Short URL</th>
+                    <th>Clicks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% shortUrls.forEach(shortUrl => { %>
+                    <tr>
+                        <td>
+                            <a href="<%= shortUrl.full %>"><%= shortUrl.full %></a>
+                        </td>
+                        <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+                        <td><%= shortUrl.clicks %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
